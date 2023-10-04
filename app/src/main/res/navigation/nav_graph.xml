@@ -12,6 +12,12 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
+        android:id="@+id/navigation_cat"
+        android:name="com.example.news.CategoriesFragment"
+        android:label="Top"
+        tools:layout="@layout/fragment_categories" />
+
+    <fragment
         android:id="@+id/navigation_tech"
         android:name="com.example.news.TechNewsFragment"
         android:label="Tech News"

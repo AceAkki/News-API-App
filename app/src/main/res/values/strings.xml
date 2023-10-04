@@ -4,14 +4,18 @@
     <array name="sort_options">
         <item>Relevance</item>
         <item>Latest</item>
-        <item>Popularity</item>
+
     </array>
 
-    <string-array name="countries">
-        <item>France</item>
-        <item>United States</item>
-        <item>United Kingdom</item>
-        <!-- Add more countries as needed -->
+    <string-array name="category_options">
+        <item>Business</item>
+        <item>Entertainment</item>
+        <item>General</item>
+        <item>Health</item>
+        <item>Science</item>
+        <item>Sports</item>
+
+
     </string-array>
 
 </resources>

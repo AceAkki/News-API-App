@@ -23,8 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:menu="@menu/bottom_nav_menu"
-        android:background="@color/Color5"
-        style="@style/BottomNavigationStyle"
         />
 
 

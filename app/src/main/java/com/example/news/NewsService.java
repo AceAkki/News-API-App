@@ -18,10 +18,13 @@ public interface NewsService {
     );
 
     @GET("top-headlines")
-    Call<NewsResponse> getNewsByCountry(
+    Call<NewsResponse> getNewsByCategory(
             @Query("apiKey") String apiKey,
-            @Query("country") String country
+            @Query("country") String country,
+            @Query("category") String category
+
     );
+
 
 
     @GET("everything")

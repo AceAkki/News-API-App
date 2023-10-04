@@ -15,9 +15,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -117,32 +120,61 @@ public class SearchFragment extends Fragment {
             Collections.sort(newsArticles, new Comparator<NewsArticle>() {
                 @Override
                 public int compare(NewsArticle article1, NewsArticle article2) {
-                    // Compare articles by relevance criteria
-                    // Implement your comparison logic here
-                    return 0; // Replace with your comparison logic
+                    // Calculate relevance score for each article
+                    int relevance1 = calculateRelevance(article1);
+                    int relevance2 = calculateRelevance(article2);
+
+                    // Compare articles by relevance score (higher score is more relevant)
+                    return Integer.compare(relevance2, relevance1);
+                }
+
+                private int calculateRelevance(NewsArticle article) {
+                    String query = searchEditText.getText().toString().toLowerCase();
+                    String title = article.getTitle().toLowerCase();
+                    String description = article.getDescription().toLowerCase();
+
+                    // Count how many times the query appears in the title and description
+                    int titleMatchCount = countMatches(title, query);
+                    int descriptionMatchCount = countMatches(description, query);
+
+                    // Calculate a relevance score based on match counts (you can adjust the scoring logic)
+                    return titleMatchCount * 2 + descriptionMatchCount;
+                }
+
+                private int countMatches(String text, String query) {
+                    int count = 0;
+                    int index = text.indexOf(query);
+                    while (index != -1) {
+                        count++;
+                        index = text.indexOf(query, index + query.length());
+                    }
+                    return count;
                 }
             });
+
         } else if ("latest".equals(selectedSort)) {
             // Sort by latest (you can implement your sorting logic here)
             Collections.sort(newsArticles, new Comparator<NewsArticle>() {
                 @Override
                 public int compare(NewsArticle article1, NewsArticle article2) {
-                    // Compare articles by latest criteria
-                    // Implement your comparison logic here
-                    return 0; // Replace with your comparison logic
+                    // Compare articles by publication date to determine relevance
+                    // Parse the publication date into Date objects
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+                    Date date1, date2;
+                    try {
+                        date1 = dateFormat.parse(article1.getPublishedAt());
+                        date2 = dateFormat.parse(article2.getPublishedAt());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                        return 0; // Handle parsing errors
+                    }
+
+                    // Compare the publication dates
+                    return date2.compareTo(date1); // Sort in descending order for relevance
                 }
             });
-        } else if ("popularity".equals(selectedSort)) {
-            // Sort by popularity (you can implement your sorting logic here)
-            Collections.sort(newsArticles, new Comparator<NewsArticle>() {
-                @Override
-                public int compare(NewsArticle article1, NewsArticle article2) {
-                    // Compare articles by popularity criteria
-                    // Implement your comparison logic here
-                    return 0; // Replace with your comparison logic
-                }
-            });
-        }
-        // Add more sorting criteria as needed
+
+              }
+
     }
 }

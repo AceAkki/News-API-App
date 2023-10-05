@@ -80,12 +80,12 @@ public class SearchFragment extends Fragment {
     }
 
     private void performSearch() {
-        String apiKey = "d3e5abf2bd454e63b6d226b88b492878"; // Replace with your News API key
+        String apiKey = "d3e5abf2bd454e63b6d226b88b492878"; 
         String query = searchEditText.getText().toString().trim();
         String selectedSort = sortSpinner.getSelectedItem().toString().toLowerCase();
 
         if (!query.isEmpty()) {
-            // Make an API request to search for news articles
+            
             NewsService newsService = RetrofitClient.getClient();
             newsService.getNewsByKeyword(apiKey, query, selectedSort).enqueue(new Callback<NewsResponse>() {
                 @Override
@@ -114,17 +114,17 @@ public class SearchFragment extends Fragment {
     }
 
     private void sortNewsArticles(String selectedSort) {
-        // Sort the news articles based on the selected sorting option
+        
         if ("relevance".equals(selectedSort)) {
-            // Sort by relevance (you can implement your sorting logic here)
+            
             Collections.sort(newsArticles, new Comparator<NewsArticle>() {
                 @Override
                 public int compare(NewsArticle article1, NewsArticle article2) {
-                    // Calculate relevance score for each article
+                    
                     int relevance1 = calculateRelevance(article1);
                     int relevance2 = calculateRelevance(article2);
 
-                    // Compare articles by relevance score (higher score is more relevant)
+                    
                     return Integer.compare(relevance2, relevance1);
                 }
 
@@ -133,11 +133,11 @@ public class SearchFragment extends Fragment {
                     String title = article.getTitle().toLowerCase();
                     String description = article.getDescription().toLowerCase();
 
-                    // Count how many times the query appears in the title and description
+                
                     int titleMatchCount = countMatches(title, query);
                     int descriptionMatchCount = countMatches(description, query);
 
-                    // Calculate a relevance score based on match counts (you can adjust the scoring logic)
+                    
                     return titleMatchCount * 2 + descriptionMatchCount;
                 }
 

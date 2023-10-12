@@ -14,16 +14,15 @@
         android:titleCondensed="Category News" />
 
     <item
-        android:id="@+id/navigation_tech"
-        android:title="Tech News"
-        android:icon="@drawable/tech"
-        android:titleCondensed="Tech News" />
-
-
-
-    <item
         android:id="@+id/navigation_search"
         android:title="Search"
         android:icon="@drawable/search"
         android:titleCondensed="Search" />
+
+    <item
+        android:id="@+id/navigation_tech"
+        android:title="AI News"
+        android:icon="@drawable/tech"
+        android:titleCondensed="Tech News" />
+
 </menu>

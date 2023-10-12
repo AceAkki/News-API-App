@@ -18,16 +18,18 @@
         tools:layout="@layout/fragment_categories" />
 
     <fragment
-        android:id="@+id/navigation_tech"
-        android:name="com.example.news.TechNewsFragment"
-        android:label="Tech News"
-        tools:layout="@layout/fragment_tech_news" />
-
-    <fragment
         android:id="@+id/navigation_search"
         android:name="com.example.news.SearchFragment"
         android:label="Search"
         tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/navigation_tech"
+        android:name="com.example.news.TechNewsFragment"
+        android:label="AI News"
+        tools:layout="@layout/fragment_tech_news" />
+
+
 
 
 </navigation>

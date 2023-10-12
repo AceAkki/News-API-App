@@ -9,11 +9,11 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/icon"
-        android:label="@string/app_name"
+        android:icon="@drawable/icon0"
+        android:label="News"
         android:roundIcon="@drawable/icon_r"
         android:supportsRtl="true"
-        android:theme="@style/AppThemeD"
+        android:theme="@style/Base.Theme.News"
 
         tools:targetApi="31">
         <activity

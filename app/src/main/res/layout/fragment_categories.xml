@@ -1,36 +1,60 @@
-<!-- fragment_categories.xml -->
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".CategoriesFragment">
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/categoryLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Category:"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
 
     <Spinner
         android:id="@+id/categorySpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown" />
+        android:layout_below="@id/categoryLabel"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/countryLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Country:"
+        android:layout_below="@id/categorySpinner"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"/>
+
+    <Spinner
+        android:id="@+id/countrySpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/countryLabel"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"/>
 
     <Button
         android:id="@+id/searchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Search"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:padding="8dp" />
+        android:layout_below="@id/countrySpinner"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categoriesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_news" />
+        android:layout_below="@id/searchButton"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"/>
 
-</LinearLayout>
+</RelativeLayout>

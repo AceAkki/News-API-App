@@ -6,11 +6,15 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
@@ -47,31 +51,40 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
                 .load(article.getUrlToImage())
                 .into(holder.newsImage);
 
+        // Show/hide the "View in Browser" button based on whether the URL is available
+        if (article.getUrl() != null && !article.getUrl().isEmpty()) {
+            holder.viewInBrowserButton.setVisibility(View.VISIBLE);
+        } else {
+            holder.viewInBrowserButton.setVisibility(View.GONE);
+        }
+
         holder.itemView.setOnClickListener(v -> openArticleInBrowser(article.getUrl()));
     }
+
 
     @Override
     public int getItemCount() {
         return articles != null ? articles.size() : 0;
     }
 
+
     static class NewsViewHolder extends RecyclerView.ViewHolder {
         TextView newsTitle;
         TextView newsDescription;
-
         TextView newsAuthor;
         ImageView newsImage;
-
-
+        Button viewInBrowserButton;
 
         NewsViewHolder(@NonNull View itemView) {
             super(itemView);
             newsTitle = itemView.findViewById(R.id.titleTextView);
             newsDescription = itemView.findViewById(R.id.descriptionTextView);
             newsImage = itemView.findViewById(R.id.newsImage);
-            newsAuthor =itemView.findViewById(R.id.authorTextView);
+            newsAuthor = itemView.findViewById(R.id.authorTextView);
+            viewInBrowserButton = itemView.findViewById(R.id.viewInBrowserButton);
         }
     }
+
 
     private void openArticleInBrowser(String url) {
         if (url != null && !url.isEmpty()) {
@@ -80,4 +93,4 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             context.startActivity(intent);
         }
     }
-}
+   }

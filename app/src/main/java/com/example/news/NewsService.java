@@ -14,7 +14,7 @@ public interface NewsService {
     @GET("top-headlines")
     Call<NewsResponse> getTechNews(
             @Query("apiKey") String apiKey,
-            @Query("category") String category
+            @Query("q") String keyword
     );
 
     @GET("top-headlines")

@@ -10,15 +10,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class TechNewsFragment extends Fragment {
     private RecyclerView techNewsRecyclerView;
-    private TechNewsAdapter techNewsAdapter;
+    private NewsAdapter newsAdapter;
+    private static final String QUERY = "Artificial Intelligence";
 
     public TechNewsFragment() {
     }
@@ -30,32 +29,25 @@ public class TechNewsFragment extends Fragment {
 
         techNewsRecyclerView = view.findViewById(R.id.techNewsRecyclerView);
         techNewsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        newsAdapter = new NewsAdapter(getContext());
+        techNewsRecyclerView.setAdapter(newsAdapter);
 
-        techNewsAdapter = new TechNewsAdapter(getContext());
-        techNewsRecyclerView.setAdapter(techNewsAdapter);
-
-        // Fetch and display tech news
-        fetchTechNews();
+        fetchNewsArticles();
 
         return view;
     }
 
-    private void fetchTechNews() {
+    private void fetchNewsArticles() {
         String apiKey = "d3e5abf2bd454e63b6d226b88b492878"; // API key
-        String techCategory = "technology"; // Category for tech news
 
-        //  Retrofit interface for making the API request
+        // Retrofit interface for making the API request
         NewsService newsService = RetrofitClient.getClient();
-
-        // MAPI request to fetch tech news
-        Call<NewsResponse> call = newsService.getTechNews(apiKey, techCategory);
-        call.enqueue(new Callback<NewsResponse>() {
+        newsService.getTechNews(apiKey, QUERY).enqueue(new Callback<NewsResponse>() {
             @Override
             public void onResponse(@NonNull Call<NewsResponse> call, @NonNull Response<NewsResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    // Successfully fetched tech news articles
-                    List<NewsArticle> techNewsArticles = response.body().getArticles();
-                    techNewsAdapter.setData(techNewsArticles);
+                    // Successfully fetched news articles
+                    newsAdapter.setData(response.body().getArticles());
                 } else {
                     // Handle API error
                 }
